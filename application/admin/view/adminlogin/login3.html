@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="{$config.language|htmlentities}">
+<head>
+    {include file="common/meta" /}
+
+    <style type="text/css">
+        body {
+            color: #999;
+            background-color: #f1f4fd;
+            background-size: cover;
+            background: #FFFFFF;
+            background-image: none;
+        }
+
+        a {
+            color: #444;
+        }
+
+
+        .login-screen {
+            max-width: 800px;
+            padding: 0;
+            margin: 160px auto 0 auto;
+
+        }
+
+        .login-screen .well {
+            border-radius: 26px;
+            -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            background: none;
+            border: none;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        @media (max-width: 767px) {
+            .login-screen {
+                padding: 0 20px;
+            }
+            .login-head{
+                display: none
+            }
+            .login-form{
+                width: 100%!important;
+                display: block;
+                float: none;
+            }
+        }
+
+        .profile-img-card {
+            width: 100px;
+            height: 100px;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            margin: -93px auto 30px;
+            border: 5px solid #fff;
+        }
+
+        .login-head {
+            background: #899fe1;
+        }
+
+        .login-form {
+            padding: 60px 30px 30px;
+            position: relative;
+            z-index: 99;
+        }
+
+        #login-form {
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        #login-form .input-group {
+            margin-bottom: 15px;
+        }
+
+        #login-form .form-control {
+            font-size: 13px;
+        }
+
+        .input-group .input-group-addon{
+            background: none;
+            border: none
+        }
+        #login-form .form-control{
+            background: none;
+            border: 0;
+            padding: 0 20px 0 0;
+            height: 45px;
+        }
+        .input-group{
+            background: #F4F7F6;
+        }
+        .input-group input{
+            padding-left: 0;
+            color: #333333
+        }
+        .input-group input::placeholder{
+            color: #b1b1b1
+        }
+        .glyphicon{
+            color: #21C6A6
+        }
+        .radio label, .checkbox label{
+            color: #21C6A6
+        }
+        .profile-name-card{
+            color: #333333;
+            font-size: 25px;
+            text-align: center;
+            font-weight: bold
+        }
+        .leftBottom{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 424px;
+            height: 478px;
+            display: block;
+        }
+        .rightTop{
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 444px;
+            height: 137px;
+            display: block;
+        }
+        .login-head{
+            float: left;
+            width: 50%;
+            height: 425px
+        }
+        .login-head img{
+            width: 100%;
+            display: block;
+            height: 100%;
+            object-fit: cover;
+        }
+        .login-form{
+            float: right;
+            width: 50%;
+            background-color: #FFFFFF
+        }
+        .btn_color{
+            background-image: -moz-linear-gradient( 90deg, rgb(29,188,156) 0%, rgb(47,216,182) 99%);
+            background-image: -webkit-linear-gradient( 90deg, rgb(29,188,156) 0%, rgb(47,216,182) 99%);
+            background-image: -ms-linear-gradient( 90deg, rgb(29,188,156) 0%, rgb(47,216,182) 99%);
+        }
+        .btn_color:active{
+            opacity: 0.8;
+            background-image: -moz-linear-gradient( 90deg, rgb(29,188,156) 0%, rgb(47,216,182) 99%);
+            background-image: -webkit-linear-gradient( 90deg, rgb(29,188,156) 0%, rgb(47,216,182) 99%);
+            background-image: -ms-linear-gradient( 90deg, rgb(29,188,156) 0%, rgb(47,216,182) 99%);
+            outline: 0;
+            border: 0
+        }
+        .tip_text{line-height: 36px;text-align: center;position: absolute;top: 0;left: 0;right: 0;}
+        .tip_text img{display: inline-block;vertical-align: middle;}
+        .tip_text p{display: inline-block;vertical-align: middle;margin: 0 }
+        .tip_text.success{background-color: rgba(42,211,178,0.1);}
+        .tip_text.warn{background-color: rgba(244,175,95,0.1);}
+
+        :-webkit-autofill,
+        :-webkit-autofill:hover,
+        :-webkit-autofill:focus,
+        :-webkit-autofill:active {
+            -webkit-text-fill-color: #2b739d !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        #keeplogin:checked +label i::before{
+            content: '';
+            background-image: url('__CDN__/assets/addons/adminlogin/login3/check_icon.png');
+            background-size: cover;
+            background-position: center center;
+            border: 0;
+            width: 12px;
+            height: 12px;
+            display: block;
+        }
+        #keeplogin:checked +label i{
+            border: 0;
+        }
+        input[type="checkbox"] + label i{
+            cursor: pointer;
+            font-size: 0.3em;
+        }
+        [id^="keeplogin"] + label i{
+            background-color: #ffffff;
+            border: 1px solid #666666;
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: -2px;
+        }
+        [id^="keeplogin"] + label:active i{
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .checkbox .inline {
+            padding-left: 0px;
+        }
+
+        img {
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media screen and (max-width: 800px) {
+            .panel-default {
+                display: none !important;
+            }
+        }
+    </style>
+    <!--@formatter:off-->
+    <!--@formatter:on-->
+</head>
+<body>
+<div class="container">
+    <img src="__CDN__/assets/addons/adminlogin/login3/leftBottomImg.png" class="leftBottom">
+    <img src="__CDN__/assets/addons/adminlogin/login3/rightTopImg.png" class="rightTop">
+    <div class="login-wrapper">
+        <div class="login-screen">
+            <div class="well">
+                <div class="login-head">
+                    <img src="__CDN__/assets/addons/adminlogin/login3/mainImg.png"/>
+                </div>
+                <div class="login-form">
+                    <div class="tip_text success hidden">
+                        <img src="__CDN__/assets/addons/adminlogin/login3/success_icon.png">
+                        <p>登录成功，即将跳转！</p>
+                    </div>
+                    <div class="tip_text warn hidden">
+                        <img src="__CDN__/assets/addons/adminlogin/login3/warn_icon.png">
+                        <p></p>
+                    </div>
+                    <p id="profile-name" class="profile-name-card" style="text-overflow: ellipsis; overflow: hidden;white-space: nowrap;">{$site.name|htmlentities}</p>
+                    <i class="angle-icon angle-icon1"></i>
+                    <i class="angle-icon angle-icon2"></i>
+                    <i class="angle-icon angle-icon3"></i>
+                    <i class="angle-icon angle-icon4"></i>
+                    <form action="adminlogin/login" method="post" id="login-form">
+                        <div id="errtips" class="hide"></div>
+                        {:token()}
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+                            <input type="text" class="form-control" id="pd-form-username" placeholder="{:__('Username')}" name="username" autocomplete="off" value="" data-rule="{:__('Username')}:required;username"/>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                            <input type="password" class="form-control" id="pd-form-password" placeholder="{:__('Password')}" name="password" autocomplete="off" value="" data-rule="{:__('Password')}:required;password"/>
+                        </div>
+                        <!--@CaptchaBegin-->
+                        {if $Think.config.fastadmin.login_captcha}
+                        <div class="input-group captcha-group {$hasCaptcha?:'hidden'}">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></div>
+                            <input type="text" name="captcha" class="form-control" placeholder="{:__('Captcha')}" data-rule="{:__('Captcha')}:required;length(4)" autocomplete="off"/>
+                            <span class="input-group-addon" style="padding:0;border:none;cursor:pointer;">
+                                            <img src="{:rtrim('__PUBLIC__', '/')}/index.php?s=/captcha" width="100" height="30" onclick="this.src = '{:rtrim('__PUBLIC__', '/')}/index.php?s=/captcha&r=' + Math.random();"/>
+                                        </span>
+                        </div>
+                        {/if}
+                        <!--@CaptchaEnd-->
+                        <div class="form-group checkbox">
+                            <input type="checkbox" checked name="keeplogin" id="keeplogin" value="1"/>
+                            <label class="inline" for="keeplogin">
+                                <i></i>
+                                {:__('Keep login')}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-lg btn-block btn_color">{:__('Sign in')}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {if $templateTypeList}
+    <div style="position: fixed; right: 30px; bottom: 0">
+        <div class="panel panel-default panel-primary" style="width: 300px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">切换主题</h3>
+                插件配置关闭调试会自动删除此弹窗
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    {foreach $templateTypeList as $key=>$item}
+                    <a href="?type={$key|htmlentities}" class="list-group-item">{$item|htmlentities}</a>
+                    {/foreach}
+                    <li class="list-group-item">敬请期待更多主题</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {/if}
+</div>
+{include file="common/script" /}
+</body>
+</html>
